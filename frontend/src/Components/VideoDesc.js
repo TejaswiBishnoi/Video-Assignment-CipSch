@@ -1,20 +1,57 @@
-import { Box, Typography } from "@mui/material";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import { Box, Button, Chip, Divider, Grid, IconButton, Paper, Stack, Typography } from "@mui/material";
 import React, { useState } from "react";
+import ShareIcon from '@mui/icons-material/Share';
+import { HorizontalRule } from '@mui/icons-material';
 
 function VideoDesc(props){
     const [views, setViews] = useState(props.views);
     const [likes, setLikes] = useState(props.likes);
-
+    const [liked, setLiked] = useState(props.liked)
     function likeHandler(){
-        setLikes(likes + 1);
+        if (!liked){
+            setLikes(likes + 1);
+            setLiked(true);
+        }
+        else{
+            setLikes(likes - 1);
+            setLiked(false);
+        }
     }
 
     return(
-        <Box sx={{width:'90%', mx:'auto'}}>
-            <Typography variant="h3">
-
-            </Typography>
-        </Box>
+        <Paper sx={{width:'90%', mx:'auto', my:5, backgroundColor:'whitesmoke'}}>
+            <Box sx={{p:4}}>
+                <Typography variant="h5" align="left" mb={2}>
+                    {props.title}
+                </Typography>
+                <Grid container rowSpacing={1}>
+                    <Grid item xs={12} md={7}>
+                        <Typography align="left" fontSize={'1.1rem'}>By: {props.by}</Typography>
+                    </Grid>
+                    <Grid item xs md>
+                        <Stack spacing={1} direction={"row"} alignItems={"flex-start"}>
+                            <Button color="primary" variant={liked?'contained':'outlined'} sx={{p: 0.7}} onClick={likeHandler}>
+                                <ThumbUpIcon sx={{fontSize: '1rem'}}/>
+                                <Typography align='left'>&nbsp;{likes} </Typography>
+                            </Button>
+                            <Button color='primary' variant='outlined' sx={{p: 0.7}}>
+                                <ShareIcon sx={{fontSize: '1rem'}}/>
+                                <Typography align='left' textTransform={'capitalize'}>&nbsp;Share </Typography>
+                            </Button>                        
+                        </Stack>
+                    </Grid>
+                </Grid>
+                <Typography align='left' fontSize={'1.1rem'} my={2}>
+                    Uploaded on: {props.date}
+                </Typography>
+                <Typography align='left' variant='h6'>
+                    Description
+                </Typography>
+                <Divider/>
+                <Typography align='left'>{props.desc}</Typography>
+            </Box>
+        </Paper>
     );
     
 }

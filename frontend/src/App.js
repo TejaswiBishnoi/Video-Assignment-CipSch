@@ -8,7 +8,7 @@ import VideoDesc from './Components/VideoDesc';
 function App() {
     return (
         <div className="App">
-            <VideoDesc props/>
+            <VideoDesc views={100} likes={100} title={'Halo'} desc={'Hello'} by={'Me'} date={'27/10/2023'}/>
         </div>
   );
 }
