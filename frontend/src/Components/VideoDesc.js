@@ -20,32 +20,32 @@ function VideoDesc(props){
     }
 
     return(
-        <Paper sx={{width:'90%', mx:'auto', my:5, backgroundColor:'whitesmoke'}}>
+        <Paper sx={{width:'90%', mx:'auto', my:2, backgroundColor:'whitesmoke'}}>
             <Box sx={{p:4}}>
                 <Typography variant="h5" align="left" mb={2}>
                     {props.title}
                 </Typography>
                 <Grid container rowSpacing={1}>
                     <Grid item xs={12} md={7}>
-                        <Typography align="left" fontSize={'1.1rem'}>By: {props.by}</Typography>
+                        <Typography align="left" fontSize={'0.8rem'}>By: {props.by}</Typography>
                     </Grid>
                     <Grid item xs md>
                         <Stack spacing={1} direction={"row"} alignItems={"flex-start"}>
                             <Button color="primary" variant={liked?'contained':'outlined'} sx={{p: 0.7}} onClick={likeHandler}>
-                                <ThumbUpIcon sx={{fontSize: '1rem'}}/>
-                                <Typography align='left'>&nbsp;{likes} </Typography>
+                                <ThumbUpIcon sx={{fontSize: '0.8rem'}}/>
+                                <Typography sx={{fontSize: '0.8rem'}} align='left'>&nbsp;{likes} </Typography>
                             </Button>
                             <Button color='primary' variant='outlined' sx={{p: 0.7}}>
-                                <ShareIcon sx={{fontSize: '1rem'}}/>
-                                <Typography align='left' textTransform={'capitalize'}>&nbsp;Share </Typography>
+                                <ShareIcon sx={{fontSize: '0.8rem'}}/>
+                                <Typography sx={{fontSize: '0.8rem'}} align='left' textTransform={'capitalize'}>&nbsp;Share </Typography>
                             </Button>                        
                         </Stack>
                     </Grid>
                 </Grid>
-                <Typography align='left' fontSize={'1.1rem'} my={2}>
+                <Typography align='left' fontSize={'0.8rem'} my={2}>
                     Uploaded on: {props.date}
                 </Typography>
-                <Typography align='left' variant='h6'>
+                <Typography align='left' fontSize={'1.1rem'}>
                     Description
                 </Typography>
                 <Divider/>
