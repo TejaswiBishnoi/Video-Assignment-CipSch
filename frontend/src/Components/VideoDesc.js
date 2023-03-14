@@ -1,12 +1,13 @@
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import { Box, Button, Chip, Divider, Grid, IconButton, Paper, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ShareIcon from '@mui/icons-material/Share';
 import { HorizontalRule } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 function VideoDesc(props){
     const [views, setViews] = useState(props.views);
-    const [likes, setLikes] = useState(props.likes);
+    const [likes, setLikes] = useState("");
     const [liked, setLiked] = useState(props.liked)
     function likeHandler(){
         if (!liked){
@@ -18,7 +19,13 @@ function VideoDesc(props){
             setLiked(false);
         }
     }
-
+    useEffect(()=>{
+        
+    }, [])
+    useEffect(()=>{
+        console.log(likes);
+        setLikes(props.likes);
+    },[props])
     return(
         <Paper sx={{width:'90%', mx:'auto', my:2, backgroundColor:'whitesmoke'}}>
             <Box sx={{p:4}}>
@@ -35,7 +42,7 @@ function VideoDesc(props){
                                 <ThumbUpIcon sx={{fontSize: '0.8rem'}}/>
                                 <Typography sx={{fontSize: '0.8rem'}} align='left'>&nbsp;{likes} </Typography>
                             </Button>
-                            <Button color='primary' variant='outlined' sx={{p: 0.7}}>
+                            <Button color='primary' variant='outlined' sx={{p: 0.7}} LinkComponent={Link} to="/video/640f5d8749e3cd3da4cda5d3">
                                 <ShareIcon sx={{fontSize: '0.8rem'}}/>
                                 <Typography sx={{fontSize: '0.8rem'}} align='left' textTransform={'capitalize'}>&nbsp;Share </Typography>
                             </Button>                        

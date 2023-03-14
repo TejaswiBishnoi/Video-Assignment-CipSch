@@ -4,10 +4,10 @@ import React from "react";
 function ReplyCard(props){
     return(
         <Card>
-            <CardContent sx={{pt: 0.5, pb: 0.5, '&:last-child': { pb: 0 }}}>
+            <CardContent sx={{pt: 0.5, pb: 0.5}}>
                 <Stack direction={'row'} justifyContent={'space-between'}>
                     <Typography fontSize={'0.7rem'} color={'gray'}>
-                        {props.data.author}
+                        {props.data.user}
                     </Typography>
                     <Typography fontSize={'0.7rem'} color={'gray'}>
                         {props.data.date}

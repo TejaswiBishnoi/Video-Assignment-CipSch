@@ -1,5 +1,6 @@
 import { Button, Card, CardContent, CardHeader, Stack, Typography } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 function CommentCard(props){
     return(
@@ -7,7 +8,7 @@ function CommentCard(props){
             <CardContent sx={{pt: 0.5, pb: 0.5, '&:last-child': { pb: 0 }}}>
                 <Stack direction={'row'} justifyContent={'space-between'}>
                     <Typography fontSize={'0.7rem'} color={'gray'}>
-                        {props.data.author}
+                        {props.data.user}
                     </Typography>
                     <Typography fontSize={'0.7rem'} color={'gray'}>
                         {props.data.date}
@@ -17,7 +18,7 @@ function CommentCard(props){
                     {props.data.content}
                 </Typography>
                 <Stack direction={'row'} justifyContent={'left'}>
-                    <Button sx={{textTransform: 'capitalize', fontSize:'0.7rem'}}>
+                    <Button sx={{textTransform: 'capitalize', fontSize:'0.7rem'}} LinkComponent={Link} to={"/video/" + props.videoid + '/' + props.data._id}>
                         {props.data.replies} Replies
                     </Button>
                 </Stack>

@@ -10,6 +10,7 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AppBar from '@mui/material/AppBar';
+import { Link } from "react-router-dom";
 
 const pages = ['Home 🏠', 'Notifications 🔔', 'Upload ⬆️'];
 const settings = ['Account', 'Logout'];
@@ -40,8 +41,8 @@ function NavBar(){
                 <Typography
                     variant="h6"
                     noWrap
-                    component="a"
-                    href="/"
+                    component={Link}
+                    to="/"
                     sx={{
                     mr: 2,
                     display: { xs: 'none', md: 'flex' },
@@ -86,7 +87,7 @@ function NavBar(){
                     >
                         {pages.map((page) => (
                             <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                <Typography textAlign="center">{page}</Typography>
+                                <Typography component={Link} to="/" textAlign="center">{page}</Typography>
                             </MenuItem>
                         ))}
                     </Menu>
@@ -94,8 +95,8 @@ function NavBar(){
                 <Typography
                     variant="h5"
                     noWrap
-                    component="a"
-                    href=""
+                    component={Link}
+                    to="/"
                     sx={{
                     mr: 2,
                     display: { xs: 'flex', md: 'none' },
@@ -110,12 +111,13 @@ function NavBar(){
                 <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } , ml: 2}}>
                     {pages.map((page) => (
                     <Button
+                        LinkComponent={Link}
                         variant="contained"
                         color="warning"
                         key={page}
                         onClick={handleCloseNavMenu}
                         sx={{ mx:0.5, p:0.7, my: 2, color: 'white', display: 'block' }}
-                        href="/"
+                        to="/"
                     >
                         <Typography color={"white"} textAlign="center" textTransform={'none'}>{page}</Typography>
                     </Button>

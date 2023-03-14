@@ -3,7 +3,7 @@ import axios from "axios";
 import { Box, Card, CardContent, CardMedia, Grid, Tooltip, Typography } from "@mui/material";
 import HomeCard from "./HomeCard";
 
-const baseurl = "http://localhost:5000/getvideo"
+const baseurl = "http://localhost:5000/getvideos"
 
 function Home(){
     const [data, setData] = useState([])
@@ -11,7 +11,7 @@ function Home(){
         axios.get(baseurl).then((resp)=>{
             if (resp.status == 200){
                 setData(resp.data.data);
-                console.log(data);
+                console.log(resp.data.data);
             }
         }).catch((e)=>{
             //console.log(e)
