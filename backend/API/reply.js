@@ -3,7 +3,7 @@ var url = "mongodb://localhost:27017/";
 
 async function getcomments(req, res){
     console.log("ddd");
-    if (!req.body.videoid || !req.body.content || !req.user){
+    if (!req.body.commentid || !req.body.content || !req.user){
         res.status(400);
         return;
     }
@@ -19,12 +19,12 @@ async function getcomments(req, res){
     var dt = new Date().toISOString().slice(0, 10).split('-').reverse().join('/');
     const obj = {
         user: req.user,
-        video: req.body.videoid,
+        video: "",
         date: dt,
         content: req.body.content,
         replies: 0,
-        reply: false,
-        replyto: ""    
+        reply: true,
+        replyto: req.body.commentid    
     }
     let resp = await col.insertOne(obj);
     if (resp.acknowledged == true){

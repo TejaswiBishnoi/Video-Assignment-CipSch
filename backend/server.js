@@ -14,6 +14,9 @@ app.get('/', (req, res)=>{res.send('hello')});
 const login = require('./API/login');
 app.post('/login', (req, res)=>{login.login(req, res)});
 
+const getvid = require('./API/getvideo');
+app.get('/getvideo', (req, res)=>{getvid.x(req, res)});
+
 const s = require('./API/signup');
 app.post('/signup', (req, res)=>{s.signup(req, res)});
 
@@ -22,6 +25,16 @@ app.post('/comments', (req, res)=>{ss.getcomments(req, res)});
 
 const reps = require('./API/getreplies');
 app.post('/replies', (req, res)=>{reps.get(req,res)});
+
+
+const authmiddleware = require('./API/authmiddle');
+app.use(authmiddleware.x);
+
+const comment = require('./API/comment');
+app.post('/comment', (req, res)=>{comment.x(req,res)});
+
+const reply = require('./API/reply');
+app.post('/reply', (req, res)=>{reply.x(req,res)});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
