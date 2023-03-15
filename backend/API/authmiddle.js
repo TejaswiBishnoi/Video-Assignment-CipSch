@@ -12,6 +12,7 @@ async function authmiddleware(req, res, next){
     let db = client.db('video');
     let col = db.collection('tokens');
     if (req.user || !req.body.token || req.body.token.length != 24) {
+        console.log(req.body);
         res.status(401).send('Incorrect Request');
         return;
     }

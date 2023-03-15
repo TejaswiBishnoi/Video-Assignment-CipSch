@@ -1,13 +1,24 @@
 const express = require('express');
 const app = express();
 const port = 5000;
-
+const multer = require('multer');
 const cors = require('cors')
 app.use(cors({origin:'*'}));
 
 const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+const multerStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "video");
+  },
+  filename: (req, file, cb) => {
+    var namef = Date.now().toString() + '-' + req.body.user;
+    cb(null, `${namef}.mp4`);
+  },
+});
+const upload = multer({ storage: multerStorage });
 
 app.get('/', (req, res)=>{res.send('hello')});
 
@@ -46,6 +57,9 @@ app.post('/like', authmiddleware.x, (req, res)=>{like.x(req, res)});
 
 const changepass = require('./API/changepass');
 app.post('/changepass', authmiddleware.x, (req, res)=>{changepass.x(req, res)});
+
+const upld = require('./API/upload')
+app.post('/upload', upload.single('file'), authmiddleware.x, (req, res)=>{upld.x(req, res)});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)

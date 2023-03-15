@@ -13,6 +13,7 @@ import Login from './Components/Login';
 import Logout from './Components/Logout';
 import LoginErrCard from './Components/LoginErrCard';
 import Account from './Components/Account';
+import Upload from './Components/Upload.js';
 function App() {
     return (
         <div className="App">
@@ -29,6 +30,7 @@ function App() {
                 </Route>
                 <Route path='/logout' element={<Logout/>}/>
                 <Route path='/account' element={<Account/>}/>
+                <Route path='/upload' element={<Upload/>}/>
             </Routes>
         </div>
   );
