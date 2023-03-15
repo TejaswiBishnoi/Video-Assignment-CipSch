@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
+var ObjectID = require('mongodb').ObjectId;
 
 async function getcomments(req, res){
     console.log("ddd");
@@ -28,6 +29,7 @@ async function getcomments(req, res){
     }
     let resp = await col.insertOne(obj);
     if (resp.acknowledged == true){
+        let resp2 = await col.updateOne({_id : new ObjectID(req.body.commentid)}, {$inc:{replies:1}});
         res.status(200).send("Inserted");
     }
     else {

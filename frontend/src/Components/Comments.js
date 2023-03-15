@@ -2,12 +2,30 @@ import { Box, Button, Divider, Chip, Paper, Stack, TextField, TextareaAutosize, 
 import React, { useEffect, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
 import CommentCard from "./CommentCard";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 function Comments(){
     const [data, setData] = useState([])
     const {videoid} = useParams();
+    const navigate = useNavigate()
+    const [commentcont, setCommentcont] = useState("");
+
+    function postComment(){
+        if (!localStorage.getItem('token')){
+            navigate('/login/redir');
+            return;
+        }
+        let token = localStorage.getItem('token');
+        axios.post('http://localhost:5000/comment', {token: token, content: commentcont, videoid: videoid}).then((resp)=>{
+            if(resp.status == 200){
+                alert('Comment has been posted');
+            }
+        }).catch((e)=>{
+            alert(e.response.data);
+        });
+    }
+
     useEffect(()=>{
         console.log(videoid);
         axios.post('http://localhost:5000/comments', {videoid: videoid}).then((resp)=>{
@@ -22,8 +40,8 @@ function Comments(){
             <Paper sx={{height:100, backgroundColor:'whitesmoke'}}>
                 <Stack height={'100%'} direction={"column"} justifyContent={'center'} mx={2}>
                     <Stack direction={"row"} spacing={1}>                    
-                        <TextField label='Comment' multiline rows={2} color="success" sx={{backgroundColor:"white", display:"flex", flexGrow: 1}}/>
-                        <Button disabled={false} sx={{p:0.7}}>
+                        <TextField label='Comment' multiline rows={2} value={commentcont} onChange={(e)=>setCommentcont(e.target.value)} color={commentcont==""?"error":"success"} sx={{backgroundColor:"white", display:"flex", flexGrow: 1}}/>
+                        <Button onClick={postComment} disabled={commentcont==""} sx={{p:0.7}}>
                             <SendIcon/>
                         </Button>
                     </Stack>
