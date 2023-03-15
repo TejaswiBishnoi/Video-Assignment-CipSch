@@ -48,7 +48,7 @@ function Comments(){
                 </Stack>
             </Paper>
             <Paper sx={{display:"flex", backgroundColor:'whitesmoke'}}>
-                <Stack width={'100%'} mx={2} my={1} direction={"column"} spacing={1}>
+                <Stack width={'100%'} mx={2} my={1} direction={"column-reverse"} spacing={1}>
                     <Divider>
                         <Chip label='Comments'/>
                     </Divider>

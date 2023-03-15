@@ -20,7 +20,7 @@ function Home(){
 
     return(
         <Box sx={{overflowY: 'scroll', my: 5, mx: {xs:2, md: 10}}}>
-            <Grid container>
+            <Grid container direction={"row-reverse"}>
                 {/* <Grid item xs={12} md={4} lg={3} sm={6}>
                     <Card variant="outlined" sx={{width: '100%', height: 420}}>
                         <CardMedia sx={{maxHeight:200, overflowY:"clip", overflowX:'clip', backgroundColor: 'black'}}>

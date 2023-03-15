@@ -38,7 +38,7 @@ function Video(){
                         <Player/>
                     </Box>
                     <Box mx={'auto'} mt={0}>
-                        <VideoDesc views={data.views} likes={data.likes} liked={false} title={data.title} by={data.by} date={data.date} desc={data.description}/>
+                        <VideoDesc views={data.views} likes={data.likes} title={data.title} by={data.by} date={data.date} desc={data.description}/>
                     </Box>
                 </Stack>
             </Grid>

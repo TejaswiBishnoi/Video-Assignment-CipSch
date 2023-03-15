@@ -39,6 +39,9 @@ app.post('/comment', authmiddleware.x,(req, res)=>{comment.x(req,res)});
 const reply = require('./API/reply');
 app.post('/reply', authmiddleware.x, (req, res)=>{reply.x(req,res)});
 
+const like = require('./API/like');
+app.post('/like', authmiddleware.x, (req, res)=>{like.x(req, res)});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
-})
+});

@@ -18,7 +18,22 @@ function Login(){
             if (resp.status == 200){
                 console.log(resp.data);
                 localStorage.setItem('token', resp.data);
+                localStorage.setItem('user', user);
                 navigate('/');
+            }
+            else{
+                console.log(resp.data);
+            }
+        }).catch((e)=>{
+            alert(e.response.data);
+        })
+    }
+
+    function signup(){
+        axios.post('http://localhost:5000/signup', {user: user, password: pass}).then((resp)=>{
+            if (resp.status == 200){
+                console.log(resp.data);
+                alert('Registered Successfully: Please Login Now');
             }
             else{
                 console.log(resp.data);
@@ -43,14 +58,14 @@ function Login(){
                                 <TextField label="Username" color={user==""?"error":"primary"} value={user} onChange={(e)=>setUser(e.target.value)} sx={{mx:2, backgroundColor:'white'}}/>
                             </Stack>
                             <Stack mt={4}>
-                                <TextField label="Password" color={user==""?"error":"primary"} value={pass} onChange={(e)=>setPass(e.target.value)} sx={{mx:2, backgroundColor:'white'}}/>
+                                <TextField label="Password" type="password" color={pass==""?"error":"primary"} value={pass} onChange={(e)=>setPass(e.target.value)} sx={{mx:2, backgroundColor:'white'}}/>
                             </Stack>
                             <Grid mt={5} container>
                                 <Grid item xs={6}>
                                     <Button onClick={login} disabled={user==""||pass==""} variant="contained"><Typography textTransform={'capitalize'}>Login</Typography></Button>
                                 </Grid>
                                 <Grid item xs={6}>
-                                    <Button disabled={user==""||pass==""} variant="contained"><Typography textTransform={'capitalize'}>Signup</Typography></Button>
+                                    <Button onClick={signup} disabled={user==""||pass==""} variant="contained"><Typography textTransform={'capitalize'}>Signup</Typography></Button>
                                 </Grid>
                             </Grid>
                         </CardContent>

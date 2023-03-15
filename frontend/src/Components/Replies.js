@@ -54,11 +54,7 @@ function Replies(props){
                 </Stack>
             </Paper>
             <Paper sx={{display:"flex", backgroundColor:'whitesmoke'}}>                                
-                <Stack width={'100%'} mx={2} my={1} direction={"column"} spacing={1}>
-                    <CommentCard2 data={comment} back={videoid}/>
-                    <Divider>
-                        <Chip label='Replies'/>
-                    </Divider>
+                <Stack width={'100%'} mx={2} my={1} direction={"column-reverse"} spacing={1}>                    
                     {/* <ReplyCard data={{author: 'Tejaswi', content:'Some Content', date: '13/03/2023'}}/>
                     <ReplyCard data={{author: 'Tejaswi', content:'Some Content', date: '13/03/2023'}}/> */}
                     {
@@ -68,6 +64,10 @@ function Replies(props){
                             );
                         })
                     }
+                    <Divider>
+                        <Chip label='Replies'/>
+                    </Divider>
+                    <CommentCard2 data={comment} back={videoid}/>
                 </Stack>
             </Paper>            
         </Stack>

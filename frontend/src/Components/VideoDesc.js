@@ -3,25 +3,52 @@ import { Box, Button, Chip, Divider, Grid, IconButton, Paper, Stack, Typography 
 import React, { useEffect, useState } from "react";
 import ShareIcon from '@mui/icons-material/Share';
 import { HorizontalRule } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 function VideoDesc(props){
     const [views, setViews] = useState(props.views);
     const [likes, setLikes] = useState("");
-    const [liked, setLiked] = useState(props.liked)
+    const [liked, setLiked] = useState(false)
+    const navigate = useNavigate();
+    const {videoid} = useParams();
     function likeHandler(){
-        if (!liked){
-            setLikes(likes + 1);
-            setLiked(true);
+        if (!localStorage.getItem('token')){
+            navigate('/login/redir');
+            return;
         }
-        else{
-            setLikes(likes - 1);
-            setLiked(false);
+        if (!liked){
+            
+            axios.post('http://localhost:5000/like', {token: localStorage.getItem('token'), videoid: videoid, action: "like"}).then((res)=>{
+                if(res.status==200){
+                    setLikes(likes + 1);
+                    setLiked(true);
+                }
+            }).catch((e)=>{alert(e.response.data)});
+        }
+        else{            
+            axios.post('http://localhost:5000/like', {token: localStorage.getItem('token'), videoid: videoid, action: "unlike"}).then((res)=>{
+                if(res.status==200){
+                    setLikes(likes - 1);
+                    setLiked(false);
+                }
+            }).catch((e)=>{alert(e.response.data)});
         }
     }
     useEffect(()=>{
-        
-    }, [])
+        if (!localStorage.getItem('token')){
+            // navigate('/login/redir');
+            return;
+        }
+        axios.post('http://localhost:5000/like', {token: localStorage.getItem('token'), videoid: videoid, action: "get"}).then((resp)=>{
+            if (resp.status == 200){
+                setLiked(resp.data.liked);
+                console.log(resp.data.liked);
+            }
+        }).catch((e)=>{
+            console.log(e.response.data);
+        })
+    }, []);
     useEffect(()=>{
         console.log(likes);
         setLikes(props.likes);
