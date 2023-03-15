@@ -9,6 +9,9 @@ import Comments from './Components/Comments';
 import Replies from './Components/Replies';
 import Video from './Components/Video';
 import { Route, Routes } from 'react-router-dom';
+import Login from './Components/Login';
+import Logout from './Components/Logout';
+import LoginErrCard from './Components/LoginErrCard';
 function App() {
     return (
         <div className="App">
@@ -20,6 +23,10 @@ function App() {
                     <Route index element={<Comments/>}/>
                     <Route path=':commentid' element={<Replies/>}/>
                 </Route>
+                <Route path='/login' element={<Login/>}>
+                    <Route path='redir' element={<LoginErrCard/>} />
+                </Route>
+                <Route path='/logout' element={<Logout/>}/>
             </Routes>
         </div>
   );

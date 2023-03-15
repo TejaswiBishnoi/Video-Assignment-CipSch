@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
@@ -10,29 +10,82 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AppBar from '@mui/material/AppBar';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const pages = ['Home 🏠', 'Notifications 🔔', 'Upload ⬆️'];
+const pages = [['Home 🏠', '/'], ['Notifications 🔔', '/notifications'], ['Upload ⬆️', '/upload']];
 const settings = ['Account', 'Logout'];
+const settings3 = [['Account', '/account'], ['Logout', '/logout']];
+const settings2 = [['Login', '/login']]
+
+function ProfileButton(){
+    const [anchorElUser, setAnchorElUser] = React.useState(null);
+    const [data, setData] = useState(settings2);
+    const navigate = useNavigate();
+    const handleOpenUserMenu = (event) => {
+        setAnchorElUser(event.currentTarget);
+    };
+    const handleCloseUserMenu = () => {
+        setAnchorElUser(null);
+    };
+    const handleButtonPress = (event) =>{
+        if (!localStorage.getItem('token')){
+            setData(settings2);
+        }
+        else setData(settings3);
+        handleOpenUserMenu(event);
+    }
+    const handleMenuPress = (dat)=>{
+        navigate(dat);
+    }
+
+    return(
+        <Box sx={{ flexGrow: 0 }}>
+                    <Tooltip title="Open settings">
+                        <Button variant="contained" onClick={handleButtonPress} color="warning">
+                            <Typography color={"white"} textAlign="center" textTransform={'none'}>Profile</Typography>
+                        </Button>
+                    </Tooltip>
+                    <Menu
+                        sx={{ mt: '45px' }}
+                        id="menu-appbar"
+                        anchorEl={anchorElUser}
+                        anchorOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        keepMounted
+                        transformOrigin={{
+                            vertical: 'top',
+                            horizontal: 'right',
+                        }}
+                        open={Boolean(anchorElUser)}
+                        onClose={handleCloseUserMenu}
+                    >
+                    {data.map((dat) => (
+                        <MenuItem key={dat[0]} onClick={(e)=>{handleMenuPress(dat[1]); handleCloseUserMenu(e)}}>
+                            <Typography textAlign="center">{dat[0]}</Typography>
+                        </MenuItem>
+                    ))}
+                    </Menu>
+                </Box>
+    );
+}
 
 function NavBar(){
     const [anchorElNav, setAnchorElNav] = React.useState(null);
     const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+    const navigate = useNavigate();
     const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
-  };
+    const handleMenuPress = (dat)=>{
+        navigate(dat);
+    }
 
   return (
     <AppBar position="static">
@@ -86,8 +139,8 @@ function NavBar(){
                         }}
                     >
                         {pages.map((page) => (
-                            <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                <Typography component={Link} to="/" textAlign="center">{page}</Typography>
+                            <MenuItem key={page[0]} onClick={()=>{handleMenuPress(page[1]); handleCloseNavMenu();}}>
+                                <Typography textAlign="center">{page[0]}</Typography>
                             </MenuItem>
                         ))}
                     </Menu>
@@ -114,17 +167,17 @@ function NavBar(){
                         LinkComponent={Link}
                         variant="contained"
                         color="warning"
-                        key={page}
+                        key={page[0]}
                         onClick={handleCloseNavMenu}
                         sx={{ mx:0.5, p:0.7, my: 2, color: 'white', display: 'block' }}
-                        to="/"
+                        to={page[1]}
                     >
-                        <Typography color={"white"} textAlign="center" textTransform={'none'}>{page}</Typography>
+                        <Typography color={"white"} textAlign="center" textTransform={'none'}>{page[0]}</Typography>
                     </Button>
                     ))}
                 </Box>
-
-                <Box sx={{ flexGrow: 0 }}>
+                <ProfileButton/>
+                {/* <Box sx={{ flexGrow: 0 }}>
                     <Tooltip title="Open settings">
                         <Button variant="contained" onClick={handleOpenUserMenu} color="warning">
                             <Typography color={"white"} textAlign="center" textTransform={'none'}>Profile</Typography>
@@ -152,7 +205,7 @@ function NavBar(){
                         </MenuItem>
                     ))}
                     </Menu>
-                </Box>
+                </Box> */}
             </Toolbar>
         </Container>
     </AppBar>
