@@ -12,6 +12,7 @@ import { Route, Routes } from 'react-router-dom';
 import Login from './Components/Login';
 import Logout from './Components/Logout';
 import LoginErrCard from './Components/LoginErrCard';
+import Account from './Components/Account';
 function App() {
     return (
         <div className="App">
@@ -27,6 +28,7 @@ function App() {
                     <Route path='redir' element={<LoginErrCard/>} />
                 </Route>
                 <Route path='/logout' element={<Logout/>}/>
+                <Route path='/account' element={<Account/>}/>
             </Routes>
         </div>
   );

@@ -42,6 +42,9 @@ app.post('/reply', authmiddleware.x, (req, res)=>{reply.x(req,res)});
 const like = require('./API/like');
 app.post('/like', authmiddleware.x, (req, res)=>{like.x(req, res)});
 
+const changepass = require('./API/changepass');
+app.post('/changepass', authmiddleware.x, (req, res)=>{changepass.x(req, res)});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 });
