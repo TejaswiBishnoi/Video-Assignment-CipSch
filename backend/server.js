@@ -61,6 +61,12 @@ app.post('/changepass', authmiddleware.x, (req, res)=>{changepass.x(req, res)});
 const upld = require('./API/upload')
 app.post('/upload', upload.single('file'), authmiddleware.x, (req, res)=>{upld.x(req, res)});
 
+const getnotif = require('./API/getnotif')
+app.post('/getnotif', authmiddleware.x, (req,res)=>{getnotif.x(req,res)});
+
+const clearnotif = require('./API/clearnotif')
+app.post('/clearnotif', authmiddleware.x, (req,res)=>{clearnotif.x(req,res)});
+
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
 });

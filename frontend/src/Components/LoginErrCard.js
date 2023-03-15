@@ -1,10 +1,8 @@
-import { Card, Typography } from "@mui/material";
+import { Alert, Typography } from "@mui/material";
 
 function LoginErrCard(){
     return(
-        <Card sx={{my:2}}>
-            <Typography color={'red'} align="center">To perform that action, please Login or Signup!</Typography>                
-        </Card>
+        <Alert severity="error" sx={{my:2}}>To perform that action, please Login or Signup!</Alert>
     );
 }
 export default LoginErrCard
