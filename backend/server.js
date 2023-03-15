@@ -29,6 +29,8 @@ app.post('/comments', (req, res)=>{ss.getcomments(req, res)});
 const reps = require('./API/getreplies');
 app.post('/replies', (req, res)=>{reps.get(req,res)});
 
+const stream = require('./API/stream');
+app.get('/stream/:videoid', (req, res)=>{stream.x(req, res)});
 
 const authmiddleware = require('./API/authmiddle');
 //app.use(authmiddleware.x);

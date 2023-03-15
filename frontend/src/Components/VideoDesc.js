@@ -1,4 +1,5 @@
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Box, Button, Chip, Divider, Grid, IconButton, Paper, Stack, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ShareIcon from '@mui/icons-material/Share';
@@ -72,6 +73,10 @@ function VideoDesc(props){
                             <Button color='primary' variant='outlined' sx={{p: 0.7}} LinkComponent={Link} to="/video/640f5d8749e3cd3da4cda5d3">
                                 <ShareIcon sx={{fontSize: '0.8rem'}}/>
                                 <Typography sx={{fontSize: '0.8rem'}} align='left' textTransform={'capitalize'}>&nbsp;Share </Typography>
+                            </Button>
+                            <Button color='primary' variant='outlined' sx={{p: 0.7}} LinkComponent={Link} to="/video/640f5d8749e3cd3da4cda5d3">
+                                <VisibilityIcon sx={{fontSize: '0.8rem'}}/>
+                                <Typography sx={{fontSize: '0.8rem'}} align='left' textTransform={'capitalize'}>&nbsp;{props.views} </Typography>
                             </Button>                        
                         </Stack>
                     </Grid>
