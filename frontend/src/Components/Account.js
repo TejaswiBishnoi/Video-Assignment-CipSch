@@ -10,7 +10,7 @@ function Account(){
             navigate('/login/redir');
             return;
         }
-    });
+    },[]);
     const [curpass, setCurpass] = useState("");
     const [newpass, setNewpass] = useState("");
 

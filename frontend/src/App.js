@@ -14,6 +14,7 @@ import Logout from './Components/Logout';
 import LoginErrCard from './Components/LoginErrCard';
 import Account from './Components/Account';
 import Upload from './Components/Upload.js';
+import Notifications from './Components/Notifications';
 function App() {
     return (
         <div className="App">
@@ -31,6 +32,7 @@ function App() {
                 <Route path='/logout' element={<Logout/>}/>
                 <Route path='/account' element={<Account/>}/>
                 <Route path='/upload' element={<Upload/>}/>
+                <Route path='/notifications' element={<Notifications/>}/>
             </Routes>
         </div>
   );

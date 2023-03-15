@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
+var notif = require('./gennotif');
 
 async function getcomments(req, res){
     console.log("ddd");
@@ -28,6 +29,7 @@ async function getcomments(req, res){
     }
     let resp = await col.insertOne(obj);
     if (resp.acknowledged == true){
+        await notif.comment(req.body.videoid, req.user);
         res.status(200).send("Inserted");
     }
     else {

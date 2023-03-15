@@ -13,7 +13,7 @@ function Upload(){
         if(!localStorage.getItem('token')){
             navigate('/login/redir');
         }
-    });
+    }, []);
 
     function submit(){
         if(!localStorage.getItem('token')){
